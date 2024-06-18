@@ -1,3 +1,5 @@
+#Работа 1. Зашифрование и расишифрование кода Вижинера 
+#Сделал Бунин Кирилл из группы БТ-21. Special for Maruchlenko
 def msg_and_key():
     msg = input("Сообщение: ").upper()
     key = input("Ключ: ").upper()
