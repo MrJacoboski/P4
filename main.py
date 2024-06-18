@@ -29,6 +29,11 @@ def create_vigenere_table():
                 table[row].append(chr((row + ord('А')) + column - 32))
             else:
                 table[row].append(chr((row + ord('А')) + column))
+    # вывод таблицы
+    # for row in table:
+    #     for column in row:
+    #         print(column, end=" ")
+    #     print(end="\n")
     return table
 
 def cipher_encryption(message, mapped_key):
