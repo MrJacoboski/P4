@@ -1,0 +1,55 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+users = []
+methods = []
+sessions = []
+
+class User:
+    def __init__(self, login, secret):
+        self.login = login
+        self.secret = secret
+
+class Method:
+    def __init__(self, id, caption, json_params, description):
+        self.id = id
+        self.caption = caption
+        self.json_params = json_params
+        self.description = description
+
+class Session:
+    def __init__(self, id, user_id, method_id, data_in, params, data_out, status, created_at, time_op):
+        self.id = id
+        self.user_id = user_id
+        self.method_id = method_id
+        self.data_in = data_in
+        self.params = params
+        self.data_out = data_out
+        self.status = status
+        self.created_at = created_at
+        self.time_op = time_op
+
+@app.route("/add_user", methods=["POST"])
+def add_user():
+    data = request.json
+    login = data.get("login")
+    secret = data.get("secret")
+    
+    if not login or not secret:
+        return jsonify({"error": "Login and secret are required"}), 400
+    
+    if len(login) < 3 or len(login) > 30 or len(secret) < 3 or len(secret) > 30:
+        return jsonify({"error": "Login and secret must be between 3 and 30 characters"}), 400
+    
+    if any(user.login == login for user in users):
+        return jsonify({"error": "User with this login already exists"}), 400
+    
+    new_user = User(login, secret)
+    users.append(new_user)
+    return jsonify({"message": "User added successfully"})
+
+@app.route("/users", methods=["GET"])
+def get_users():
+    users_data = [{"login": user.login} for user in users]
+    return jsonify(users_data)
