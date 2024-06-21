@@ -5,9 +5,14 @@
 
 1. Клонировать репозиторий: git clone https://github.com/MrJacoboski/P4.git
 Установить зависимости:
-2. Установить зависимости: pip install -r requirements.txt 
-3. Запустить приложение: python week_1.py
-
+2. Установить зависимости:
+````bash
+pip install -r requirements.txt
+````
+4. Запустить приложение:
+````bash
+python week_1.py
+````
 Использование
 1. Добавить пользователя: 
 - Отправить POST запрос на /users с данными пользователя.
