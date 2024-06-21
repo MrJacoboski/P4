@@ -3,9 +3,12 @@
 
 Установка
 
-1. Клонировать репозиторий: git clone https://github.com/MrJacoboski/P4.git
+1. Клонировать репозиторий:
+````bash
+git clone https://github.com/MrJacoboski/P4.git
+````
 Установить зависимости:
-2. Установить зависимости:
+3. Установить зависимости:
 ````bash
 pip install -r requirements.txt
 ````
