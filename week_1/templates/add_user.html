@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Добавить пользователя</title>
+    <title>Add User</title>
 </head>
 <body>
     <h1>Add User</h1>
     <form action="{{ url_for('add_user') }}" method="post">
-        <label for="login">Логин:</label>
+        <label for="login">Login:</label>
         <input type="text" name="login" id="login" required minlength="3" maxlength="30"><br><br>
-        <label for="secret">Секрет:</label>
+        <label for="secret">Secret:</label>
         <input type="password" name="secret" id="secret" required minlength="3" maxlength="30"><br><br>
-        <button type="submit">Добавить пользователя</button>
+        <button type="submit">Add User</button>
     </form>
-    <a href="{{ url_for('home') }}">Вернуться домой</a>
+    <a href="{{ url_for('home') }}">Back to Home</a>
 </body>
 </html>
