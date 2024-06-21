@@ -9,7 +9,7 @@
 ````bash
 pip install -r requirements.txt
 ````
-4. Запустить приложение:
+3. Запустить приложение:
 ````bash
 python week_1.py
 ````
