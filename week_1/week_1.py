@@ -1,15 +1,16 @@
-from flask import Flask, request, jsonify, render_template, redirect, url_for
+from flask import Flask, request, jsonify, render_template, redirect, url_for, flash
 from datetime import datetime
 import string
 import time
 
 app = Flask(__name__)
+app.secret_key = 'supersecretkey'
 
 # Алфавит для шифрования
 ALPHABET = " ,.:(_)-0123456789АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
 
 users = {
-    "user1": {"secret": "password1"},
+    "Данёк": {"secret": "password1"},
     "user2": {"secret": "password2"},
     "user3": {"secret": "password3"}
 }
@@ -51,7 +52,17 @@ def home():
 
 @app.route('/users', methods=['POST'])
 def add_user():
-    return render_template('index.html')
+    login = request.form['login']
+    secret = request.form['secret']
+    if 3 <= len(login) <= 30 and 3 <= len(secret) <= 30:
+        if login in users:
+            flash('User already exists!')
+        else:
+            users[login] = {'secret': secret}
+            flash('User added successfully!')
+    else:
+        flash('Login and secret must be between 3 and 30 characters long.')
+    return redirect(url_for('list_users'))
 
 
 @app.route('/users', methods=['GET'])
@@ -61,7 +72,11 @@ def get_users():
 
 @app.route('/users/list', methods=['GET'])
 def list_users():
-    return render_template('users.html', users=list(users.keys()))
+    return render_template('users.html', users=users)
+
+@app.route('/add_user_form', methods=['GET'])
+def add_user_form():
+    return render_template('add_user.html')
 
 
 @app.route('/methods', methods=['GET'])
