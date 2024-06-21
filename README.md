@@ -7,8 +7,7 @@
 ````bash
 git clone https://github.com/MrJacoboski/P4.git
 ````
-Установить зависимости:
-3. Установить зависимости:
+2. Установить зависимости:
 ````bash
 pip install -r requirements.txt
 ````
