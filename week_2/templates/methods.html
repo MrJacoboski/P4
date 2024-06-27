@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Методы</title>
+</head>
+<body>
+    <h1>Методы шифровки</h1>
+    <ul>
+        {% for method in methods %}
+            <li>
+                <b>{{ method.caption }}</b> - {{ method.description }}
+                <form action="{{ url_for('encrypt_form') }}" method="get" style="display:inline;">
+                    <input type="hidden" name="method_id" value="{{ method.id }}">
+                    <button type="submit">Использовать этот метод</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Вернуться домой</a>
+</body>
+</html>

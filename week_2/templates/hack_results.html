@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Результаты взлома</title>
+</head>
+<body>
+    <h1>Результаты взлома</h1>
+    <p>ID сессии: {{ session_id }}</p>
+    <table border="1">
+        <tr>
+            <th>Сдвиг/Ключ</th>
+            <th>Расшифрованный текст</th>
+        </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{ result.shift or result.key }}</td>
+                <td>{{ result.decrypted_text }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

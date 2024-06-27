@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Взлом шифра Виженера</title>
+</head>
+<body>
+    <h1>Взлом шифра Виженера</h1>
+    <form action="/hack_vigenere" method="post">
+        <label for="user_id">Пользователь:</label>
+        <select name="user_id" id="user_id">
+            {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="data_in">Зашифрованный текст:</label>
+        <textarea name="data_in" id="data_in" rows="4" cols="50"></textarea>
+        <br>
+        <label for="keyword">Ключевое слово:</label>
+        <input type="text" name="keyword" id="keyword">
+        <br>
+        <input type="submit" value="Взломать">
+    </form>
+</body>
+</html>

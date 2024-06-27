@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сессии</title>
+</head>
+<body>
+    <h1>Закодированная сессия</h1>
+    <ul>
+        {% for session in sessions %}
+            <li>
+                <b>Session ID:</b> {{ session.id }} <br>
+                <b>User:</b> {{ session.user_id }} <br>
+                <b>Method:</b> {{ session.method_id }} <br>
+                <b>Data In:</b> {{ session.data_in }} <br>
+                <b>Data Out:</b> {{ session.data_out }} <br>
+                <b>Created At:</b> {{ session.created_at }} <br>
+                <a href="{{ url_for('get_session', session_id=session.id) }}">Посмотреть детали сессии</a>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+</body>
+</html>
