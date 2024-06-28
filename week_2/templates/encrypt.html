@@ -5,7 +5,7 @@
 </head>
 <body>
     <h1>{{ method.caption }} Method</h1>
-    <form action="{{ url_for('encrypt') }}" method="post">
+    <form id="textForm" action="{{ url_for('encrypt') }}" method="post">
         <input type="hidden" name="method_id" value="{{ method.id }}">
         <label for="user_id">Пользователь:</label>
         <select name="user_id" id="user_id">
@@ -13,8 +13,9 @@
                 <option value="{{ user }}">{{ user }}</option>
             {% endfor %}
         </select><br><br>
-        <label for="data_in">Текст:</label>
-        <textarea name="data_in" id="data_in" maxlength="1000" required></textarea><br><br>
+        <textarea id="datain" name="data_in" placeholder="Введите текст на русском..."></textarea>
+        <p class="error-message" id="error-message">Please enter only Russian characters.</p>
+
         {% if method.caption == 'Caesar' %}
             <label for="shift">Сдвиг:</label>
             <input type="number" name="shift" id="shift" required><br><br>
@@ -30,5 +31,29 @@
         <button type="submit">Отрпавить</button>
     </form>
     <a href="{{ url_for('get_methods') }}">Вернуться к методам</a>
+
+    <script>
+        const visibleTextarea = document.getElementById('datain');
+        const errorMessage = document.getElementById('error-message');
+        const validRegex = /^[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0-9\s,.:()_-]*$/;
+
+        visibleTextarea.addEventListener('input', function() {
+            if (!validRegex.test(this.value)) {
+                errorMessage.style.display = 'block';
+                this.value = this.value.replace(/[^АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя0-9\s,.:()_-]/g, '');
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+
+        document.getElementById('textForm').addEventListener('submit', function(event) {
+            if (!validRegex.test(visibleTextarea.value)) {
+                event.preventDefault();
+                errorMessage.style.display = 'block';
+            } else {
+                errorMessage.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
